@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { NavigationContainer } from "@react-navigation/native";
 import { RestaurantsScreen } from "../../../features/restaurants/screens/restaurants.screen";
 import { SafeArea } from "../../../components/utility/safe-area.component";
-import { Text } from "react-native";
+import { Platform, Text } from "react-native";
 import { RestaurantsNavigator } from "./restaurants.navigator";
 
 const Tab = createBottomTabNavigator();
@@ -31,6 +31,7 @@ const createScreenOptions = ({ route }) => {
         ),
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
+        headerShown:Platform.OS==='ios'?true:false
     }
 
 };
