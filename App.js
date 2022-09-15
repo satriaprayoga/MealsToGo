@@ -1,6 +1,6 @@
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components/native';
-import {RestaurantsScreen} from './src/features/restaurants/screens/restaurants.screen';
+import { RestaurantsScreen } from './src/features/restaurants/screens/restaurants.screen';
 import { theme } from './src/infrastructure/theme';
 
 import { useFonts as useOswald, Oswald_400Regular } from '@expo-google-fonts/oswald';
@@ -11,6 +11,8 @@ import { Text } from 'react-native';
 import { SafeArea } from './src/components/utility/safe-area.component';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { RestaurantsContextProvider } from './src/services/restaurants/restaurants.context';
+import { LocationContextProvider } from './src/services/location/location.context';
+
 const Settings = () => (
   <SafeArea><Text>Settings</Text></SafeArea>
 );
@@ -53,18 +55,20 @@ export default function App() {
 
   return (
     <>
-        <ThemeProvider theme={theme}>
-        <RestaurantsContextProvider>
-          <NavigationContainer>
-            <Tab.Navigator
-              screenOptions={createScreenOptions}
-            >
-              <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
-              <Tab.Screen name="Maps" component={Maps} />
-              <Tab.Screen name="Settings" component={Settings} />
-            </Tab.Navigator>
-          </NavigationContainer>
+      <ThemeProvider theme={theme}>
+        <LocationContextProvider>
+          <RestaurantsContextProvider>
+            <NavigationContainer>
+              <Tab.Navigator
+                screenOptions={createScreenOptions}
+              >
+                <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
+                <Tab.Screen name="Maps" component={Maps} />
+                <Tab.Screen name="Settings" component={Settings} />
+              </Tab.Navigator>
+            </NavigationContainer>
           </RestaurantsContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
